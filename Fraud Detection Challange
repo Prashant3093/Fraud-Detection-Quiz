@@ -1,0 +1,131 @@
+# Fraud Detection Challenge Game - README
+
+## Overview
+The **Fraud Detection Challenge Game** is an interactive web-based game where users guess whether a financial transaction is fraudulent or not. The system uses a machine learning model trained on real fraud detection datasets to provide real-time feedback.
+
+## Features
+- 🧠 **Machine Learning Model**: Trained on a dataset of fraudulent transactions.
+- 🌐 **Web UI with Streamlit**: Easy-to-use interface for players.
+- 🔄 **Flask Backend API**: Handles fraud prediction requests.
+- 📊 **Scoring System**: Players earn points for correct classifications.
+
+---
+
+## Tech Stack
+- **Backend**: Flask (Python), Scikit-learn, Joblib
+- **Frontend**: Streamlit
+- **Data Processing**: Pandas, NumPy
+- **Deployment**: Render (for backend), Streamlit Cloud (for frontend)
+
+---
+
+## Installation Guide
+### Prerequisites
+Ensure you have **Python 3.8+** installed. Then install required packages:
+```bash
+pip install pandas numpy scikit-learn flask streamlit joblib
+```
+
+### Project Structure
+```
+fraud_detection_game/
+├── data/                # Contains dataset files
+├── model/
+    model.pkl
+    preprocessor.pkl
+    X_test.npz
+    y_train.npz
+    y_test.npz
+    X_trian.npz               # Trained machine learning model
+├── backend/             # Flask API
+│   ├── data_preprocessing.py
+│   ├── train_model.py
+│   ├── app.py
+├── frontend/            # Streamlit UI
+│   ├── app.py
+├── requirements.txt
+├── README.md
+```
+
+---
+
+## Step-by-Step Setup
+
+### 1️⃣ Data Preprocessing
+Download the dataset from [Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) and place it in the `data/` folder.
+Run the preprocessing script:
+```bash
+python backend/data_preprocessing.py
+```
+
+### 2️⃣ Train the Machine Learning Model
+Train the fraud detection model:
+```bash
+python backend/train_model.py
+```
+This will generate a `fraud_model.pkl` file in `model/`.
+
+### 3️⃣ Run the Flask API
+Start the backend API for fraud detection:
+```bash
+python backend/app.py
+```
+The API will be available at `http://127.0.0.1:5000/predict`.
+
+### 4️⃣ Launch the Game UI
+Run the Streamlit frontend:
+```bash
+streamlit run frontend/app.py
+```
+A browser window will open, allowing players to classify transactions as **Fraud** or **Not Fraud**.
+
+---
+
+## API Usage
+### **Endpoint:** `/predict`
+- **Method:** `POST`
+- **Request Body:**
+```json
+{
+  "features": [0.1, -0.5, 1.2, 0.7, -1.3, 0.9, -0.8, 0.3, -0.6, 1.5]
+}
+```
+- **Response:**
+```json
+{
+  "fraud": true
+}
+```
+
+---
+
+## Deployment
+### Deploy Backend on Render
+1. Push your backend code to GitHub.
+2. Connect to [Render](https://render.com/).
+3. Deploy a **Flask API** service.
+4. Obtain a public API URL (e.g., `https://fraud-api.onrender.com`).
+
+### Deploy Frontend on Streamlit Cloud
+1. Push frontend code to GitHub.
+2. Connect to [Streamlit Cloud](https://streamlit.io/cloud).
+3. Deploy the `frontend/app.py` script.
+4. Update API calls to use the live backend URL.
+
+---
+
+## Future Enhancements
+- 🏆 Add a **leaderboard** for top players.
+- 📱 Convert the game into a **mobile app**.
+- 🎨 Improve UI with animations and charts.
+
+---
+
+## Author
+- **Prashant** - [GitHub Profile](https://github.com/your-profile)
+
+---
+
+## License
+This project is licensed under the MIT License.
+
